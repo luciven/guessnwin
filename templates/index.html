@@ -1,0 +1,166 @@
+<html><head>
+	<title></title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>	
+    
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<!-- Google Fonts -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap">
+<!-- Bootstrap core CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+<!-- Material Design Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.16.0/css/mdb.min.css" rel="stylesheet">
+
+<!-- JQuery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.16.0/js/mdb.min.js"></script><style type="text/css">/* Chart.js */
+@-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style><style type="text/css">/* Chart.js */
+@-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style><style type="text/css">/* Chart.js */
+@-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style><style type="text/css">/* Chart.js */
+@-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style><style type="text/css">/* Chart.js */
+@-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style><style type="text/css">/* Chart.js */
+@-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style>
+
+	<style>
+        h1 {
+     font-size: 2em;
+     text-align: center;
+   }
+                h6 {
+     font-size: 16px;
+     text-align: center;
+   }
+                h8 {
+                     text-align: center;
+                    font-size: 3em;
+   }
+        
+.center {
+  margin: auto;
+  width: 62%;
+  padding: 10px;
+}
+        div.wrapper {
+            width: 370px;
+            height:10px;
+        }
+        mi {
+  display: block;
+}
+
+        .btn-xl {
+    padding: 15px 20px;
+    font-size: 15px;
+    border-radius: 10px;
+    width:50%;    //Specify your width here
+}
+
+input[type="text"]
+{
+    background: transparent;
+    border: none;
+    outline: none;
+}
+        
+        ::-webkit-input-placeholder { /* Edge */
+  color: black;
+}
+
+:-ms-input-placeholder { /* Internet Explorer */
+  color: black;
+}
+
+::placeholder {
+  color: black;
+}
+        
+        
+	</style>
+</head>
+<body style="background-color:rgb(241,132,12);" class="">
+    <div></div>
+    <br><br><br><br><br>
+ 	<h1><img src="default_dp.png" height="160" width="144"></h1>
+   <h1>
+       <div class="container center_div">
+           <div class="wrapper">
+            <form method="post">
+              {% csrf_token %}
+  <input name="username" btype="text" placeholder="Enter Username">
+</div>
+       </div>
+    </h1><br>
+    
+    <h6>Tap to change</h6>
+    <div></div>
+    <br><br><br>
+    <div class="center">
+        <mi>
+	<input type="hidden" name="next" value="https://shubham-248.github.io/">
+  <button type="submit" class="btn btn-success btn-xl waves-effect waves-light " style=" height: 50px;width: 172px" value="Submit">Create Room</button>
+        </mi>
+            </div>
+<br>
+    
+<!--Modal: Login with Avatar Form-->
+<div class="modal fade" id="modalJoinRoom" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+  <div class="modal-dialog cascading-modal modal-avatar modal-sm" role="document">
+    <!--Content-->
+    <div class="modal-content">
+
+      <!--Header-->
+      <div class="modal-header">
+        <img src="default_dp.png" alt="avatar" class="rounded-circle img-responsive">
+      </div>
+      <!--Body-->
+      <div class="modal-body text-center mb-1">
+
+        <h5 class="mt-1 mb-2">User4801</h5>
+
+        <div class="md-form ml-0 mr-0">
+          <!--<input type="password" id="form29" class="form-control form-control-sm">-->
+          <label>RoomId</label>
+          <input id="room-name-input" type="text" size="100"><br>
+          <input id="room-name-submit" type="button" value="Enter"><br>
+        </div>
+      </div>
+
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+<!--Modal: Login with Avatar Form-->
+
+<div class="center"><mi>
+  <a href="" class="btn btn-success btn-xl btn purple-gradient btn-rounded waves-effect waves-light" style=" height: 50px;width: 172px" data-toggle="modal" data-target="#modalJoinRoom">Join Room</a>
+    </mi></div>
+  </form>
+
+<script>
+        document.querySelector('#room-name-input').onkeyup = function(e) {
+            if (e.keyCode === 13) {  // enter, return
+                document.querySelector('#room-name-submit').click();
+            }
+        };
+
+        document.querySelector('#room-name-submit').onclick = function(e) {
+            var roomName = document.querySelector('#room-name-input').value;
+            window.location.pathname = '/game/' + roomName + '/';
+        };
+</script>
+
+
+
+
+<div class="hiddendiv common"></div></body></html>

@@ -39,19 +39,19 @@
 
       
     <h2>Create Your Room </h2>
-      <div>
-        <img src="default_dp.png" alt="avatar" class="rounded-circle img-responsive">
+      
+	  <div class="center">
+        <img src="default_dp.png" alt="avatar" class="rounded-circle img-responsive" height="110" width=100%>
       </div>
-    <br>
+    <br><br><br><br><br>
+	<br><br>
     <form method="post">
-      {% csrf_token %}
-    
-    <div class="container center_div">
+    <div class="center">
     <div class="wrapper">
       <input name="host_user" btype="text" placeholder="Enter Username">
     </div>
     </div>
-    <div></div>
+ 
     <label class="col-md-4 control-label" for="Roomname">Room Name</label>
     
     <div class="container center_div">
@@ -86,12 +86,12 @@
   <label class="col-md-4 control-label" for="Players">Number of Players</label>
   <div class="col-md-4">
     <select id="Players" name="no_of_players" class="form-control">
-      <option value=1>Single Player - 1</option>
-      <option value=2>Two Players - 2</option>
-      <option value=3>Three Players - 3</option>
-      <option value=4>Four Players - 4</option>
-      <option value=5>Five Players - 5</option>
-      <option value=6>Six Players - 6</option>
+      <option value="1">Single Player - 1</option>
+      <option value="2">Two Players - 2</option>
+      <option value="3">Three Players - 3</option>
+      <option value="4">Four Players - 4</option>
+      <option value="5">Five Players - 5</option>
+      <option value="6">Six Players - 6</option>
     </select>
   </div>
 </div>
@@ -102,12 +102,12 @@
   <label class="col-md-4 control-label" for="Rounds">Number of Rounds</label>
   <div class="col-md-4">
     <select id="Players" name="no_of_rounds" class="form-control">
-      <option value=1>Single Round -1</option>
-      <option value=5>Five Rounds - 5</option>
-      <option value=10>Ten Rounds - 10</option>
-      <option value=15>Fifteen Rounds - 15</option>
-      <option value=20>Twenty Rounds - 20</option>
-      <option value=25>Twenty-Five Rounds - 25</option>
+      <option value="1">Single Round -1</option>
+      <option value="5">Five Rounds - 5</option>
+      <option value="10">Ten Rounds - 10</option>
+      <option value="15">Fifteen Rounds - 15</option>
+      <option value="20">Twenty Rounds - 20</option>
+      <option value="25">Twenty-Five Rounds - 25</option>
     </select>
   </div>
 </div>

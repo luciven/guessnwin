@@ -46,6 +46,7 @@
     <br><br><br><br><br>
 	<br><br>
     <form method="post">
+	    {% csrf_token %}
     <div class="center">
     <div class="wrapper">
       <input name="host_user" btype="text" placeholder="Enter Username">

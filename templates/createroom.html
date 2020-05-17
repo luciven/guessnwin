@@ -1,11 +1,11 @@
 <html><head>
-	<title></title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>	
-	<style>
+  <title></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+  <style>
         h1 {
      font-size: 4em;
      text-align: center;
@@ -33,29 +33,29 @@
         mi {
   display: block;
 }
-	</style>
+  </style>
 </head>
 <body style="background-color:rgb(70,215,215);">
 
       
     <h2>Create Your Room </h2>
-      <div>
-        <img src="default_dp.png" alt="avatar" class="rounded-circle img-responsive">
+      
+    <div class="center">
+        <img src="default_dp.png" alt="avatar" class="rounded-circle img-responsive" height="110" width=100%>
       </div>
-    <br>
+    <br><br><br><br><br>
+  <br><br>
     <form method="post">
-      {% csrf_token %}
-    
-    <div class="container center_div">
+    <div class="center">
     <div class="wrapper">
       <input name="host_user" btype="text" placeholder="Enter Username">
     </div>
     </div>
-    <div></div>
+ 
     <label class="col-md-4 control-label" for="Roomname">Room Name</label>
     
     <div class="container center_div">
-	<div class="container">
+  <div class="container">
     <div class="row">
       <div class="col">
         <input type="text" class="form-control" id="RoomName" placeholder="Enter Room Name" name="roomname" style=" height: 35px;width: 290px">
@@ -63,7 +63,7 @@
     </div>
 </div>
     </div>
-	<!---
+  <!---
     <div></div>
    
     <label for="Players" class="control-label clo-xs-1">Number of Players</label>
@@ -86,12 +86,12 @@
   <label class="col-md-4 control-label" for="Players">Number of Players</label>
   <div class="col-md-4">
     <select id="Players" name="no_of_players" class="form-control">
-      <option value=1>Single Player - 1</option>
-      <option value=2>Two Players - 2</option>
-      <option value=3>Three Players - 3</option>
-      <option value=4>Four Players - 4</option>
-      <option value=5>Five Players - 5</option>
-      <option value=6>Six Players - 6</option>
+      <option value="1">Single Player - 1</option>
+      <option value="2">Two Players - 2</option>
+      <option value="3">Three Players - 3</option>
+      <option value="4">Four Players - 4</option>
+      <option value="5">Five Players - 5</option>
+      <option value="6">Six Players - 6</option>
     </select>
   </div>
 </div>
@@ -102,12 +102,12 @@
   <label class="col-md-4 control-label" for="Rounds">Number of Rounds</label>
   <div class="col-md-4">
     <select id="Players" name="no_of_rounds" class="form-control">
-      <option value=1>Single Round -1</option>
-      <option value=5>Five Rounds - 5</option>
-      <option value=10>Ten Rounds - 10</option>
-      <option value=15>Fifteen Rounds - 15</option>
-      <option value=20>Twenty Rounds - 20</option>
-      <option value=25>Twenty-Five Rounds - 25</option>
+      <option value="1">Single Round -1</option>
+      <option value="5">Five Rounds - 5</option>
+      <option value="10">Ten Rounds - 10</option>
+      <option value="15">Fifteen Rounds - 15</option>
+      <option value="20">Twenty Rounds - 20</option>
+      <option value="25">Twenty-Five Rounds - 25</option>
     </select>
   </div>
 </div>
@@ -117,7 +117,7 @@
     
     <div class="center">
         <mi>
-	<button style=" height: 50px;width: 172px" class="btn btn-success" type="submit">Create Room</button>
+  <button style=" height: 50px;width: 172px" class="btn btn-success" type="submit">Create Room</button>
         </mi>
             </div>
     

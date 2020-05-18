@@ -1,4 +1,4 @@
-Install the modeules mentioned in requirements.txt
+Install the modules mentioned in requirements.txt
 
 Go to the project directory, i.e. guessnwin, in which you have the manage.py file.
 Run the command 'python manage.py runserver'
@@ -7,4 +7,6 @@ Type'127.0.0.1:8000/game' in the browser to access the index page.
 
 To host the server on a different ip type in the command 'python manage.py runserver ip:port'.
 Replace ip and port by the desired ip address and port respectively.
+
+docker run -p 6379:6379 -d redis:5
 

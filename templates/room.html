@@ -21,9 +21,30 @@
             + '/'
         );
 
+        window.onload = async function(e) {
+            console.log("window load")
+            console.log(chatSocket.readyState)
+            await new Promise(r => setTimeout(r, 100));
+            chatSocket.send(JSON.stringify({    
+                'command': 'fetch_messages',
+                'room': roomName
+            }));
+            console.log(chatSocket.readyState)
+        };
+
         chatSocket.onmessage = function(e) {
             const data = JSON.parse(e.data);
-            document.querySelector('#chat-log').value += (data.message + '\n');
+            if(data.command=='fetch_messages') {
+                console.log('fetch');
+                for(let i=0; i<data.messages.length;i++) {
+                    document.querySelector('#chat-log').value += (data.messages[i].author+':'+data.messages[i].content + '\n');
+                }
+            }
+            else {
+                console.log('new');
+                document.querySelector('#chat-log').value += (data.message.author+':'+data.message.content + '\n');
+            }
+            
         };
 
         chatSocket.onclose = function(e) {
@@ -41,7 +62,10 @@
             const messageInputDom = document.querySelector('#chat-message-input');
             const message = messageInputDom.value;
             chatSocket.send(JSON.stringify({
-                'message': message
+                'message': message,
+                'from': 'userwa',
+                'room': roomName,
+                'command': 'new_message'
             }));
             messageInputDom.value = '';
         };

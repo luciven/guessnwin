@@ -10,9 +10,10 @@
     <input id="chat-message-input" type="text" size="100"><br>
     <input id="chat-message-submit" type="button" value="Send">
     {{ room_name|json_script:"room-name" }}
+    {{ username|json_script:"username"}}
     <script>
         const roomName = JSON.parse(document.getElementById('room-name').textContent);
-
+        const sessionUser = JSON.parse(document.getElementById('username').textContent);
         const chatSocket = new WebSocket(
             'ws://'
             + window.location.host
@@ -24,7 +25,7 @@
         window.onload = async function(e) {
             console.log("window load")
             console.log(chatSocket.readyState)
-            await new Promise(r => setTimeout(r, 100));
+            await new Promise(r => setTimeout(r, 500));
             chatSocket.send(JSON.stringify({    
                 'command': 'fetch_messages',
                 'room': roomName
@@ -61,9 +62,10 @@
         document.querySelector('#chat-message-submit').onclick = function(e) {
             const messageInputDom = document.querySelector('#chat-message-input');
             const message = messageInputDom.value;
+            console.log(sessionUser);
             chatSocket.send(JSON.stringify({
                 'message': message,
-                'from': 'userwa',
+                'from': sessionUser,
                 'room': roomName,
                 'command': 'new_message'
             }));

@@ -21,15 +21,21 @@ class HomeView(TemplateView):
             if form.is_valid():
                 form.save()
                 room_id=request.POST.get('roomname')
+                username=request.POST.get('username')
+                request.session['member_id'] = username
+                #print("in home view",request.session['member_id'])
                 next = room_id+'/'
                 return HttpResponseRedirect(next) 
 
 class RoomView(TemplateView):
     template_name= 'room.html'
 
-    def room(self, request, room_name):
+    def get(self, request, room_name):
+        print("in roomview1")
+        print("in roomview",request.session['member_id'])
         return render(request, self.template_name, {
-            'room_name': room_name
+            'room_name': room_name,
+            'username': request.session['member_id']
         })
 
 class CreateRoomView(TemplateView):
@@ -47,11 +53,17 @@ class CreateRoomView(TemplateView):
             if form.is_valid():
                 form.save()
                 room_id=request.POST.get('roomname')
+                username=request.POST.get('host_user')
+                request.session['member_id'] = username
+                GuestUser.objects.create(
+                    username=username,
+                    roomname=room_id
+                    )
                 next = '/game/'+room_id+'/'
                 return HttpResponseRedirect(next)
             else:
-                print(type(request.POST.get('no_of_players')))
-                print(request.POST.get('no_of_players'))
+                #print(type(request.POST.get('no_of_players')))
+                #print(request.POST.get('no_of_players'))
                 return render(request, self.template_name, {
                     'form':form,
                     })

@@ -17,6 +17,7 @@ class ChatConsumer(WebsocketConsumer):
 
     def new_message(self, data):
         author = data['from']
+        print("in new message:",author)
         msgRoom = Room.objects.filter(roomname=data['room'])[0]
         author_user= GuestUser.objects.filter(username=author)[0]
         message = Message.objects.create(

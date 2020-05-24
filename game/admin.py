@@ -2,12 +2,12 @@ from django.contrib import admin
 from .models import *
 
 class GuestUserAdmin(admin.ModelAdmin):
-    fields = ('username', 'roomname')
-    list_display = ('username', 'roomname')
+    fields = ('username', 'room_id')
+    list_display = ('username', 'room_id')
 
 class RoomAdmin(admin.ModelAdmin):
-    fields = ('host_user', 'roomname', 'no_of_players', 'no_of_rounds')
-    list_display = ('host_user', 'roomname', 'no_of_players', 'no_of_rounds')
+    fields = ('room_id', 'host_user', 'roomname', 'no_of_players', 'no_of_rounds')
+    list_display = ('room_id', 'host_user', 'roomname', 'no_of_players', 'no_of_rounds')
 
 class MessageAdmin(admin.ModelAdmin):
     fields = ('author', 'content', 'timestamp')

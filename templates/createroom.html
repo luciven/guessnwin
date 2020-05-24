@@ -1,3 +1,4 @@
+{% load static %}
 <html><head>
   <title></title>
   <meta charset="utf-8">
@@ -40,21 +41,34 @@
       
     <h2>Create Your Room </h2>
       
-    <div class="center">
-        <img src="default_dp.png" alt="avatar" class="rounded-circle img-responsive" height="110" width=100%>
-      </div>
-    <br><br><br><br><br>
-  <br><br>
+    <div >
+      <img src="{% static '/img/Default_dp.png' %}" alt="avatar" style="display: block;  margin-left: auto;  margin-right: auto;  width: 50%;">
     <form method="post">
       {% csrf_token %}
-    <div class="center">
-    <div class="wrapper">
-      <input name="host_user" btype="text" placeholder="Enter Username">
-    </div>
-    </div>
  
-    <label class="col-md-4 control-label" for="Roomname">Room Name</label>
+    <input type="hidden" name="room_id" id="room" value="{{ room_id }}">
+    {{ room_id|json_script:"room-id" }}
+    <script>
+      const room_id = JSON.parse(document.getElementById('room-id').textContent);
+      const room = document.getElementById('room').value;
+      console.log("Hi")
+      console.log(room_id)
+      console.log(room)
+    </script>
+
+    <label class="col-md-4 control-label" for="HostUser">Username</label>
     
+    <div class="container center_div">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <input type="text" class="form-control" id="HostUser" placeholder="Enter Username" name="host_user" style=" height: 35px;width: 290px">
+      </div>
+    </div>
+</div>
+    </div>
+
+    <label class="col-md-4 control-label" for="RoomName">Room Name</label>
     <div class="container center_div">
   <div class="container">
     <div class="row">
@@ -79,7 +93,6 @@
     </select>
   </div>
     --->
-    <br>
           
           
 <!--<form class="form-inline">-->
@@ -96,8 +109,6 @@
     </select>
   </div>
 </div>
-          
-<br>
 
 <div class="form-group">
   <label class="col-md-4 control-label" for="Rounds">Number of Rounds</label>
@@ -125,4 +136,5 @@
     <div></div>
 
 </form>
+</div>
 </body></html>

@@ -20,7 +20,7 @@ class HomeView(TemplateView):
             form=GuestUserForm(request.POST)
             if form.is_valid():
                 form.save()
-                room_id=request.POST.get('roomname')
+                room_id=request.POST.get('room_id')
                 username=request.POST.get('username')
                 request.session['member_id'] = username
                 #print("in home view",request.session['member_id'])
@@ -30,11 +30,11 @@ class HomeView(TemplateView):
 class RoomView(TemplateView):
     template_name= 'room.html'
 
-    def get(self, request, room_name):
-        print("in roomview1")
-        print("in roomview",request.session['member_id'])
+    def get(self, request, room_id):
+        #print("in roomview1")
+        #print("in roomview",request.session['member_id'])
         return render(request, self.template_name, {
-            'room_name': room_name,
+            'room_id': room_id,
             'username': request.session['member_id']
         })
 
@@ -42,9 +42,16 @@ class CreateRoomView(TemplateView):
     template_name= 'createroom.html'
 
     def get(self, request):
+        while True:
+            roomId = ''.join(random.choices(string.ascii_lowercase + string.digits, k = 6))
+            if Room.objects.filter(room_id=roomId).exists():
+                continue
+            break
+        print("Res:", roomId)
         form = RoomForm()
         return render(request, self.template_name, {
             'form':form,
+            'room_id':roomId,
             })
 
     def post(self, request):
@@ -52,14 +59,16 @@ class CreateRoomView(TemplateView):
             form=RoomForm(request.POST)
             if form.is_valid():
                 form.save()
-                room_id=request.POST.get('roomname')
+                room_id=request.POST.get('room_id')
+                print('room:', room_id)
                 username=request.POST.get('host_user')
                 request.session['member_id'] = username
                 GuestUser.objects.create(
                     username=username,
-                    roomname=room_id
+                    room_id=room_id
                     )
                 next = '/game/'+room_id+'/'
+                print("next:",room_id)
                 return HttpResponseRedirect(next)
             else:
                 #print(type(request.POST.get('no_of_players')))
@@ -68,8 +77,3 @@ class CreateRoomView(TemplateView):
                     'form':form,
                     })
 
-
-    # def form_valid(self, form):
-    #     self.object = form.save(commit=False)
-
-    #     self.object.save()

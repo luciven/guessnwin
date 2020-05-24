@@ -7,7 +7,7 @@ from .models import *
 class ChatConsumer(WebsocketConsumer):
     
     def fetch_messages(self, data):
-        msgRoom = Room.objects.filter(roomname=data['room'])[0]
+        msgRoom = Room.objects.filter(room_id=data['room'])[0]
         messages = Message.objects.filter(room=msgRoom).order_by('timestamp')[:50]
         content = {
             'command': 'fetch_messages',
@@ -18,7 +18,7 @@ class ChatConsumer(WebsocketConsumer):
     def new_message(self, data):
         author = data['from']
         print("in new message:",author)
-        msgRoom = Room.objects.filter(roomname=data['room'])[0]
+        msgRoom = Room.objects.filter(room_id=data['room'])[0]
         author_user= GuestUser.objects.filter(username=author)[0]
         message = Message.objects.create(
             author=author_user,

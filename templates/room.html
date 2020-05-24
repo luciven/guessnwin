@@ -9,16 +9,16 @@
     <textarea id="chat-log" cols="100" rows="20"></textarea><br>
     <input id="chat-message-input" type="text" size="100"><br>
     <input id="chat-message-submit" type="button" value="Send">
-    {{ room_name|json_script:"room-name" }}
+    {{ room_id|json_script:"room-id" }}
     {{ username|json_script:"username"}}
     <script>
-        const roomName = JSON.parse(document.getElementById('room-name').textContent);
+        const room_id = JSON.parse(document.getElementById('room-id').textContent);
         const sessionUser = JSON.parse(document.getElementById('username').textContent);
         const chatSocket = new WebSocket(
             'ws://'
             + window.location.host
             + '/ws/game/'
-            + roomName
+            + room_id
             + '/'
         );
 
@@ -28,7 +28,7 @@
             await new Promise(r => setTimeout(r, 500));
             chatSocket.send(JSON.stringify({    
                 'command': 'fetch_messages',
-                'room': roomName
+                'room': room_id
             }));
             console.log(chatSocket.readyState)
         };
@@ -66,7 +66,7 @@
             chatSocket.send(JSON.stringify({
                 'message': message,
                 'from': sessionUser,
-                'room': roomName,
+                'room': room_id,
                 'command': 'new_message'
             }));
             messageInputDom.value = '';

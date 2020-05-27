@@ -28,7 +28,7 @@ class HomeView(TemplateView):
                 return HttpResponseRedirect(next) 
 
 class RoomView(TemplateView):
-    template_name= 'room.html'
+    template_name= 'layout.html'
 
     def get(self, request, room_id):
         #print("in roomview1")

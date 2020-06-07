@@ -5,6 +5,10 @@ class GuestUser(models.Model):
     username=models.CharField(max_length=30)
     room_id=models.CharField(max_length=6, default="uvwxyz")
 
+class Question(models.Model):
+    img_path=models.CharField(max_length=100)
+    answer=models.CharField(max_length=100)
+
 class Room(models.Model):
     room_id=models.CharField(max_length=6,default="abcdef")
     host_user=models.CharField(max_length=30, null=True)

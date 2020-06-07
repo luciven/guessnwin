@@ -42,7 +42,7 @@
     <h2>Create Your Room </h2>
       
     <div >
-      <img src="{% static '/img/Default_dp.png' %}" alt="avatar" style="display: block;  margin-left: auto;  margin-right: auto;  width: 50%;">
+      <img id='dp' src="{% static '/img/Default_dp.png' %}" alt="avatar" style="display: block;  margin-left: auto;  margin-right: auto;  width: 50%;">
     <form method="post">
       {% csrf_token %}
  
@@ -52,6 +52,7 @@
       const room_id = JSON.parse(document.getElementById('room-id').textContent);
       const room = document.getElementById('room').value;
       console.log("Hi")
+      console.log(document.getElementById('dp').src)
       console.log(room_id)
       console.log(room)
     </script>

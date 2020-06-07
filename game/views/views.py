@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login
 from game.forms import *
 from game.models import *
 from django.shortcuts import render
+import json
 
 class HomeView(TemplateView):
     template_name = 'index.html'
@@ -33,9 +34,17 @@ class RoomView(TemplateView):
     def get(self, request, room_id):
         #print("in roomview1")
         #print("in roomview",request.session['member_id'])
+        question_objects=Question.objects.all()
+        questions = []
+        for question in question_objects:
+            questions.append({
+                'img_path': question.img_path,
+                'answer':question.answer
+                })
         return render(request, self.template_name, {
             'room_id': room_id,
-            'username': request.session['member_id']
+            'username': request.session['member_id'],
+            'questions':questions
         })
 
 class CreateRoomView(TemplateView):

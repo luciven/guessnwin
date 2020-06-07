@@ -1,3 +1,4 @@
+{% load static %}
 <html><head>
 	<title></title>
 	<meta charset="utf-8">
@@ -11,12 +12,14 @@
 .grid-container {
   display: grid;
   grid-template-columns: 37% 63%;
-  grid-template-rows: 40% 60%;
+  grid-template-rows: 40% 1% 59%;
   gap: 1px 1px;
-  grid-template-areas: "Question Question" "Score Chat";
+  grid-template-areas: "Question Question" "Timer Timer" "Score Chat";
 }
 
 .Question { grid-area: Question; background-color: yellow; }
+
+.Timer { grid-area: Timer;}
 
 .Score { grid-area: Score; background-color: red;}
 
@@ -38,8 +41,19 @@ input {
 <body>
 
 <div class="grid-container">
+  
+    <div class="Timer">
+        <div id="bar" style="height:100%;background-color:green"></div>
+    </div>
+
   <div class="Score"></div>
-  <div class="Question"></div>
+  <div class="Question">
+      <img id="ques-img" style="max-width: 100%; max-height: 100%">
+      {{ questions|json_script:"questions" }}
+      <script>
+          
+      </script>
+  </div>
   
   <div class="Chat">
     <textarea id="chat-log" cols="150" rows="13"></textarea><br>
@@ -48,67 +62,96 @@ input {
     {{ room_id|json_script:"room-id" }}
     {{ username|json_script:"username"}}
     <script>
-        const room_id = JSON.parse(document.getElementById('room-id').textContent);
-        const sessionUser = JSON.parse(document.getElementById('username').textContent);
-        const chatSocket = new WebSocket(
-            'ws://'
-            + window.location.host
-            + '/ws/game/'
-            + room_id
-            + '/'
-        );
-
-        window.onload = async function(e) {
-            console.log("window load")
-            console.log(chatSocket.readyState)
-            await new Promise(r => setTimeout(r, 500));
-            chatSocket.send(JSON.stringify({    
-                'command': 'fetch_messages',
-                'room': room_id
-            }));
-            console.log(chatSocket.readyState)
-        };
-
-        chatSocket.onmessage = function(e) {
-            const data = JSON.parse(e.data);
-            if(data.command=='fetch_messages') {
-                console.log('fetch');
-                for(let i=0; i<data.messages.length;i++) {
-                    document.querySelector('#chat-log').value += (data.messages[i].author+':'+data.messages[i].content + '\n');
-                }
-            }
-            else {
-                console.log('new');
-                document.querySelector('#chat-log').value += (data.message.author+':'+data.message.content + '\n');
-            }
-            
-        };
-
-        chatSocket.onclose = function(e) {
-            console.error('Chat socket closed unexpectedly');
-        };
-
-        document.querySelector('#chat-message-input').focus();
-        document.querySelector('#chat-message-input').onkeyup = function(e) {
-            if (e.keyCode === 13) {  // enter, return
-                document.querySelector('#chat-message-submit').click();
-            }
-        };
-
-        document.querySelector('#chat-message-submit').onclick = function(e) {
-            const messageInputDom = document.querySelector('#chat-message-input');
-            const message = messageInputDom.value;
-            console.log(sessionUser);
-            chatSocket.send(JSON.stringify({
-                'message': message,
-                'from': sessionUser,
-                'room': room_id,
-                'command': 'new_message'
-            }));
-            messageInputDom.value = '';
-        };
+        
     </script>
   </div>
 </div>
+
+<script>
+    //Timer Bar
+    var wid = 80;
+    var elem = document.getElementById('bar');    
+    var timerId = setInterval(countdown, 1000);    
+    function countdown() {
+        if (wid== 0) {
+            elem.style.width=wid+"%";
+            clearTimeout(timerId);
+            document.getElementById('ques-img').src = "{% static '/img/timeout.gif' %}";
+        } 
+        else {
+            elem.style.width=wid+"%";
+            wid=wid-20;
+        }
+    }
+
+    //Question Image
+    const questions= JSON.parse(document.getElementById('questions').textContent);
+    path="/static".concat(questions[0]['img_path'])
+    document.getElementById('ques-img').src = path
+
+    //Chat and guessing area
+    const room_id = JSON.parse(document.getElementById('room-id').textContent);
+    const sessionUser = JSON.parse(document.getElementById('username').textContent);
+    const chatSocket = new WebSocket(
+        'ws://'
+        + window.location.host
+        + '/ws/game/'
+        + room_id
+        + '/'
+    );
+
+    window.onload = async function(e) {
+        console.log("window load")
+        console.log(chatSocket.readyState)
+        await new Promise(r => setTimeout(r, 500));
+        chatSocket.send(JSON.stringify({    
+            'command': 'fetch_messages',
+            'room': room_id
+        }));
+        console.log(chatSocket.readyState)
+    };
+
+    chatSocket.onmessage = function(e) {
+        const data = JSON.parse(e.data);
+        if(data.command=='fetch_messages') {
+            console.log('fetch');
+            for(let i=0; i<data.messages.length;i++) {
+                document.querySelector('#chat-log').value += (data.messages[i].author+':'+data.messages[i].content + '\n');
+            }
+        }
+        else {
+            console.log('new');
+            document.querySelector('#chat-log').value += (data.message.author+':'+data.message.content + '\n');
+        }
+        
+    };
+
+    chatSocket.onclose = function(e) {
+        console.error('Chat socket closed unexpectedly');
+    };
+
+    document.querySelector('#chat-message-input').focus();
+    document.querySelector('#chat-message-input').onkeyup = function(e) {
+        if (e.keyCode === 13) {  // enter, return
+            document.querySelector('#chat-message-submit').click();
+        }
+    };
+
+    document.querySelector('#chat-message-submit').onclick = function(e) {
+        const messageInputDom = document.querySelector('#chat-message-input');
+        var message = messageInputDom.value;
+        if (message==questions[0]['answer']) {
+            message="You guessed it correctly!!!"
+        }
+        console.log(sessionUser);
+        chatSocket.send(JSON.stringify({
+            'message': message,
+            'from': sessionUser,
+            'room': room_id,
+            'command': 'new_message'
+        }));
+        messageInputDom.value = '';
+    };
+</script>
 
 </body></html>

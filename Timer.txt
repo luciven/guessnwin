@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<body>
+<div id="some_div">
+</div>
+<script>
+{
+var timeLeft = 5;
+    var elem = document.getElementById('some_div');
+    
+    var timerId = setInterval(countdown, 1000);
+    
+    function countdown() {
+      if (timeLeft == 0) {
+        clearTimeout(timerId);
+         elem.innerHTML = 'Time up!';;
+      					} 
+      else {
+        elem.innerHTML = timeLeft + ' seconds remaining';
+        timeLeft--;
+      }
+    }
+    }
+</script>
+</body>
+</html>
